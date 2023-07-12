@@ -9,7 +9,9 @@ namespace Project1.Helper
         public MappingProfiles() 
         {
             CreateMap<TrainDriver, TrainDriverDto>();
-
+            CreateMap<Train, TrainDto>();
+            CreateMap<Schedule, ScheduleDto>();
+            //CreateMap<Router, RouterDto>();
         }
     }
 }
