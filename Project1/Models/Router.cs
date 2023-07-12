@@ -6,7 +6,7 @@
         public string LineName { get; set;}
         public string StartingStation { get; set;}
         public string EndingStation { get; set;}
-        public Schedule Schedule { get; set; }
+        //public Schedule Schedule { get; set; }
         public ICollection<Train> Trains { get; set; }
     }
 }

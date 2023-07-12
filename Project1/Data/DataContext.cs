@@ -30,6 +30,16 @@ namespace Project1.Data
                 .WithMany(dtc => dtc.DriverTrainCategory)
                 .HasForeignKey(d => d.DriverId);
 
+
+
+
+
+
+
+
+
+
+
             /*base.OnModelCreating(modelBuilder);
             var driver = modelBuilder.Entity<TrainDriver>();
             driver.HasKey(d => d.Id);

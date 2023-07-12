@@ -64,7 +64,7 @@ namespace Project1.Controllers
 
             if (router != null)
             {
-                ModelState.AddModelError("", "Schedule already exists");
+                ModelState.AddModelError("", "Router already exists");
                 return StatusCode(422, ModelState);
             }
 

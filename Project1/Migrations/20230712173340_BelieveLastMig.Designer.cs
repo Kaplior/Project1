@@ -12,8 +12,8 @@ using Project1.Data;
 namespace Project1.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230712062759_FirstMig")]
-    partial class FirstMig
+    [Migration("20230712173340_BelieveLastMig")]
+    partial class BelieveLastMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
