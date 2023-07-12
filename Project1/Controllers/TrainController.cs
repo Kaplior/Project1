@@ -78,9 +78,9 @@ namespace Project1.Controllers
             if (trainCreate == null)
                 return BadRequest(ModelState);
 
-           var train = _trainRepos.GetTrains()
-                .Where(t => t.TrainNumber == trainCreate.TrainNumber)
-                .FirstOrDefault();
+            var train = _trainRepos.GetTrains()
+                 .Where(t => t.TrainNumber == trainCreate.TrainNumber)
+                 .FirstOrDefault();
 
             if (train != null)
             {
@@ -88,17 +88,46 @@ namespace Project1.Controllers
                 return StatusCode(422, ModelState);
             }
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var trainMap = _mapper.Map<Train>(trainCreate);
-            if(!_trainRepos.CreateTrain(trainMap))
+            if (!_trainRepos.CreateTrain(trainMap))
             {
                 ModelState.AddModelError("", "Smth went wrong while saving");
                 return StatusCode(500, ModelState);
             }
 
             return Ok("Nice");
+        }
+
+
+
+
+        [HttpPut("{TrainId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(405)]
+        public IActionResult UpdateTrain(int TrainId, [FromBody] TrainDto updatedTrain)
+        {
+            if(updatedTrain==null)
+                return BadRequest(ModelState);
+            if (TrainId != updatedTrain.Id)
+                return BadRequest(ModelState);
+            if(!_trainRepos.TrainExists(TrainId))
+                return NotFound();
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var trainMap = _mapper.Map<Train>(updatedTrain);
+
+            if(!_trainRepos.UpdateTrain(trainMap))
+            {
+                ModelState.AddModelError("", "Smth went wrong");
+                return StatusCode(500,ModelState);
+            }
+            
+            return NoContent();
         }
     }
 }

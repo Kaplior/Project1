@@ -39,6 +39,11 @@ namespace Project1.Repository
             _context.Add(train);
             return Save();
         }
+        public bool UpdateTrain(Train train)
+        {
+            _context.Update(train);
+            return Save();
+        }
         public bool Save()
         {
             return _context.SaveChanges() > 0;

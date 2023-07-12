@@ -82,5 +82,36 @@ namespace Project1.Controllers
 
             return Ok("Nice");
         }
+
+
+        //Update
+
+        [HttpPut("{ScheduleId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(405)]
+        public IActionResult UpdateTrain(int ScheduleId, [FromBody] ScheduleDto updatedSchedule)
+        {
+            if (updatedSchedule == null)
+                return BadRequest(ModelState);
+            if (ScheduleId != updatedSchedule.Id)
+                return BadRequest(ModelState);
+            if (!_schedRepos.ScheduleExists(ScheduleId))
+                return NotFound();
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var schedMap = _mapper.Map<Schedule>(updatedSchedule);
+
+            if (!_schedRepos.UpdateSchedule(schedMap))
+            {
+                ModelState.AddModelError("", "Smth went wrong");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+
     }
 }

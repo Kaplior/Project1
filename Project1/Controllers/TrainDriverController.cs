@@ -20,6 +20,8 @@ namespace Project1.Controllers
         }
 
 
+        //GET
+
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<TrainDriver>))]
         public IActionResult GetDrivers()
@@ -53,7 +55,7 @@ namespace Project1.Controllers
 
 
 
-
+        //POST
 
         [HttpPost]
         [ProducesResponseType(201)]
@@ -85,6 +87,38 @@ namespace Project1.Controllers
 
             return Ok("Nice");
 
+        }
+
+
+
+
+
+        //UPDATE
+
+        [HttpPut("{DriverId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(405)]
+        public IActionResult UpdateTrain(int DriverId, [FromBody] TrainDriverDto updatedTrainDriver)
+        {
+            if (updatedTrainDriver == null)
+                return BadRequest(ModelState);
+            if (DriverId != updatedTrainDriver.Id)
+                return BadRequest(ModelState);
+            if (!_trainDriverRepos.TrainDriverExists(DriverId))
+                return NotFound();
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var trainDriverMap = _mapper.Map<TrainDriver>(updatedTrainDriver);
+
+            if (!_trainDriverRepos.UpdateTrainDriver(trainDriverMap))
+            {
+                ModelState.AddModelError("", "Smth went wrong");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
         }
     }
 }

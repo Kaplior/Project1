@@ -81,6 +81,36 @@ namespace Project1.Controllers
             return Ok("Nice");
         }
 
+
+
+
+        //Update
+
+        [HttpPut("{RouterId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(405)]
+        public IActionResult UpdateTrain(int RouterId, [FromBody] RouterDto updatedRouter)
+        {
+            if (updatedRouter == null)
+                return BadRequest(ModelState);
+            if (RouterId != updatedRouter.Id)
+                return BadRequest(ModelState);
+            if (!_routerRepos.RouterExists(RouterId))
+                return NotFound();
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var routerMap = _mapper.Map<Router>(updatedRouter);
+
+            if (!_routerRepos.UpdateRouter(routerMap))
+            {
+                ModelState.AddModelError("", "Smth went wrong");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
     }
 }
 

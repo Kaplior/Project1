@@ -9,6 +9,7 @@ namespace Project1.Interface
         TrainDriver GetDriver(string name);
         bool TrainDriverExists(int drivid);
         bool CreateTrainDriver(TrainDriver trainDriver);
+        bool UpdateTrainDriver(TrainDriver trainDriver);
         bool Save();
 
     }

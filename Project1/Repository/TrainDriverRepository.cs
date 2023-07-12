@@ -40,6 +40,11 @@ namespace Project1.Repository
             _context.Add(trainDriver);
             return Save();
         }
+        public bool UpdateTrainDriver(TrainDriver trainDriver)
+        {
+            _context.Update(trainDriver);
+            return Save();
+        }
         public bool Save()
         {
             var saved = _context.SaveChanges();

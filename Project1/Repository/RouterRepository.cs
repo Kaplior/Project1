@@ -32,6 +32,13 @@ namespace Project1.Repository
             _context.Add(router);
             return Save();
         }
+
+        public bool UpdateRouter(Router router)
+        {
+            _context.Update(router);
+            return Save();
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();

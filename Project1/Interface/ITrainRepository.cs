@@ -9,6 +9,7 @@ namespace Project1.Interface
         ICollection<TrainDriver> GetDriverbyTrain(int trainId);
         bool TrainExists(int Tid);
         bool CreateTrain(Train train);
+        bool UpdateTrain(Train train);
         bool Save();
     }
 }

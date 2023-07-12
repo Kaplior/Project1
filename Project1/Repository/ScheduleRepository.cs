@@ -35,6 +35,13 @@ namespace Project1.Repository
             _context.Add(schedule);
             return Save();
         }
+
+        public bool UpdateSchedule(Schedule schedule)
+        {
+            _context.Update(schedule);
+            return Save();
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();
