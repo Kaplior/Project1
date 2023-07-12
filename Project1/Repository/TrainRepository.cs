@@ -32,6 +32,17 @@ namespace Project1.Repository
             return _context.Trains.Any(t => t.Id == Tid);
             //throw new NotImplementedException();
         }
+
+        //----------------------------------//
+        public bool CreateTrain(Train train)
+        {
+            _context.Add(train);
+            return Save();
+        }
+        public bool Save()
+        {
+            return _context.SaveChanges() > 0;
+        }
     }
 }
  

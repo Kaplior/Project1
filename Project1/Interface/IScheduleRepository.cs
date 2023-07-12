@@ -7,5 +7,7 @@ namespace Project1.Interface
         ICollection<Schedule> GetSchedules();
         Schedule GetSchedule(int id);
         bool ScheduleExists(int sid);
+        bool CreateSchedule(Schedule schedule);
+        bool Save();
     }
 }

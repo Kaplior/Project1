@@ -26,5 +26,16 @@ namespace Project1.Repository
             return _context.Routers.Any(r => r.Id == Rid);
             //throw new NotImplementedException();
         }
+
+        public bool CreateRouter(Router router)
+        {
+            _context.Add(router);
+            return Save();
+        }
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
     }
 }

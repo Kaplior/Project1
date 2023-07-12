@@ -50,5 +50,41 @@ namespace Project1.Controllers
 
             return Ok(driver);
         }
+
+
+
+
+
+        [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateTrainDriver([FromBody] TrainDriverDto trainDriverCreate)
+        {
+            if (trainDriverCreate == null)
+                return BadRequest(ModelState);
+
+            var driver = _trainDriverRepos.GetDrivers()
+                 .Where(d => d.Name.Trim().ToUpper() == trainDriverCreate.Name.TrimEnd().ToUpper())
+                 .FirstOrDefault();
+
+             if (driver != null)
+             {
+                 ModelState.AddModelError("", "TrainDriver already exists");
+                 return StatusCode(422, ModelState);
+             }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var driverMap = _mapper.Map<TrainDriver>(trainDriverCreate);
+            if (!_trainDriverRepos.CreateTrainDriver(driverMap))
+            {
+                ModelState.AddModelError("", "Smth went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Nice");
+
+        }
     }
 }

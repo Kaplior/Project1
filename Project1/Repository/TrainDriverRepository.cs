@@ -33,5 +33,17 @@ namespace Project1.Repository
             return _context.TrainDrivers.Any(d => d.Id == drivid);
             //throw new NotImplementedException();
         }
+
+
+        public bool CreateTrainDriver(TrainDriver trainDriver)
+        {
+            _context.Add(trainDriver);
+            return Save();
+        }
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
     }
 }

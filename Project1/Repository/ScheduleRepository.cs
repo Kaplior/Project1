@@ -28,5 +28,17 @@ namespace Project1.Repository
             return _context.Schedules.Any(s => s.Id == sid);
             //throw new NotImplementedException();
         }
+
+
+        public bool CreateSchedule(Schedule schedule)
+        {
+            _context.Add(schedule);
+            return Save();
+        }
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
     }
 }

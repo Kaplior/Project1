@@ -49,5 +49,38 @@ namespace Project1.Controllers
 
             return Ok(schedule);
         }
+
+
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateSchedule([FromBody] ScheduleDto scheduleCreate)
+        {
+            if (scheduleCreate == null)
+                return BadRequest(ModelState);
+
+            var schedule = _schedRepos.GetSchedules()
+                 .Where(t => t.ArrivalTime == scheduleCreate.ArrivalTime)
+                 .FirstOrDefault();
+
+            if (schedule != null)
+            {
+                ModelState.AddModelError("", "Schedule already exists");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var scheduleMap = _mapper.Map<Schedule>(scheduleCreate);
+            if (!_schedRepos.CreateSchedule(scheduleMap))
+            {
+                ModelState.AddModelError("", "Smth went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Nice");
+        }
     }
 }

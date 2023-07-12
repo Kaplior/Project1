@@ -27,7 +27,10 @@ namespace Project1
                             Router = new List<Router>()
                             {
                                 new Router { LineName="Chilanzar",StartingStation = "Buyuk Ipak Yuli", EndingStation = "Almazar",
-                                Schedule = new Schedule(){ ArrivalTime =  new DateTime(2023,07,12), DepartureTime = new DateTime(2023,07,12) } },
+                                Schedule = new Schedule()
+                                {
+                                    ArrivalTime =  new DateTime(2023,07,12), DepartureTime = new DateTime(2023,07,12) }
+                                },
                             }
                         },
                         TrainDriver = new TrainDriver()

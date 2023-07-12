@@ -55,9 +55,9 @@ namespace Project1.Controllers
         [HttpGet("TrainDriver/{TrainId}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<TrainDriver>))]
         [ProducesResponseType(400)]
-        public IActionResult GetDriverbyTrain(int Trainid)
+        public IActionResult GetDriverbyTrain(int TrainId)
         {
-            var driver = _mapper.Map<List<TrainDriverDto>>(_trainRepos.GetDriverbyTrain(Trainid));
+            var driver = _mapper.Map<List<TrainDriverDto>>(_trainRepos.GetDriverbyTrain(TrainId));
 
             if (!ModelState.IsValid)
             {
@@ -65,6 +65,40 @@ namespace Project1.Controllers
             }
 
             return Ok(driver);
+        }
+
+
+
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateTrain([FromBody] TrainDto trainCreate)
+        {
+            if (trainCreate == null)
+                return BadRequest(ModelState);
+
+           var train = _trainRepos.GetTrains()
+                .Where(t => t.TrainNumber == trainCreate.TrainNumber)
+                .FirstOrDefault();
+
+            if (train != null)
+            {
+                ModelState.AddModelError("", "Train already exists");
+                return StatusCode(422, ModelState);
+            }
+
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var trainMap = _mapper.Map<Train>(trainCreate);
+            if(!_trainRepos.CreateTrain(trainMap))
+            {
+                ModelState.AddModelError("", "Smth went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Nice");
         }
     }
 }

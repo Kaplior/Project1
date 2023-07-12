@@ -7,5 +7,7 @@ namespace Project1.Interface
         ICollection<Router> GetRouters();
         Router GetRouter(int id);
         bool RouterExists(int Rid);
+        bool CreateRouter(Router router);
+        bool Save();
     }
 }
