@@ -11,7 +11,7 @@ namespace Project1.Helper
             CreateMap<TrainDriver, TrainDriverDto>();
             CreateMap<Train, TrainDto>();
             CreateMap<Schedule, ScheduleDto>();
-            //CreateMap<Router, RouterDto>();
+            CreateMap<Router, RouterDto>();
         }
     }
 }

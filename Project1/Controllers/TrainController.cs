@@ -53,7 +53,7 @@ namespace Project1.Controllers
         }
 
         [HttpGet("TrainDriver/{TrainId}")]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Train>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<TrainDriver>))]
         [ProducesResponseType(400)]
         public IActionResult GetDriverbyTrain(int Trainid)
         {

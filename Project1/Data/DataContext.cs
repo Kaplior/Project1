@@ -18,10 +18,13 @@ namespace Project1.Data
         {
             modelBuilder.Entity<DriverTrainCategory>()
                 .HasKey(dtc => new { dtc.DriverId, dtc.TrainId });
+
+
             modelBuilder.Entity<DriverTrainCategory>()
                 .HasOne(t => t.Train)
                 .WithMany(dtc => dtc.DriverTrainCategory)
                 .HasForeignKey(t => t.TrainId);
+
             modelBuilder.Entity<DriverTrainCategory>()
                 .HasOne(d => d.TrainDriver)
                 .WithMany(dtc => dtc.DriverTrainCategory)
