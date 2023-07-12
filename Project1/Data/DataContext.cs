@@ -26,6 +26,18 @@ namespace Project1.Data
                 .HasOne(d => d.TrainDriver)
                 .WithMany(dtc => dtc.DriverTrainCategory)
                 .HasForeignKey(d => d.DriverId);
+
+            /*base.OnModelCreating(modelBuilder);
+            var driver = modelBuilder.Entity<TrainDriver>();
+            driver.HasKey(d => d.Id);
+            driver.Property(p => p.Name);
+
+            var train = modelBuilder.Entity<Train>();
+            train.HasKey(d => d.Id);
+
+            train.HasOne(d => d.TrainDriver)
+                .WithOne(d => d.Train)
+                .HasForeignKey<Train>(fk => fk.Id);*/
         }
     }
 }

@@ -24,10 +24,6 @@ namespace Project1
                         {
                             TrainNumber = 1,
                             Capacity = 150,
-                            DriverTrainCategory = new List<DriverTrainCategory>()
-                            {
-                                new DriverTrainCategory { TrainDriver = new TrainDriver() { Name = "John"}}
-                            },
                             Router = new List<Router>()
                             {
                                 new Router { LineName="Chilanzar",StartingStation = "Buyuk Ipak Yuli", EndingStation = "Almazar",
