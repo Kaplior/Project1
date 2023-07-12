@@ -113,5 +113,31 @@ namespace Project1.Controllers
         }
 
 
+
+
+        //Delete
+
+        [HttpDelete("{ScheduleId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteSchedule(int ScheduleId)
+        {
+            if (!_schedRepos.ScheduleExists(ScheduleId))
+            {
+                return NotFound();
+            }
+
+            var scheduleToDelete = _schedRepos.GetSchedule(ScheduleId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (!_schedRepos.DeleteSchedule(scheduleToDelete))
+            {
+                ModelState.AddModelError("", "SMTH went wrong man");
+            }
+            return NoContent();
+        }
+
     }
 }

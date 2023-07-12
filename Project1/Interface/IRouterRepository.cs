@@ -9,6 +9,7 @@ namespace Project1.Interface
         bool RouterExists(int Rid);
         bool CreateRouter(Router router);
         bool UpdateRouter(Router router);
+        bool DeleteRouter(Router router);
         bool Save();
     }
 }

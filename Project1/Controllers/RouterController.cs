@@ -111,6 +111,33 @@ namespace Project1.Controllers
 
             return NoContent();
         }
+
+
+
+
+        //Delete
+
+        [HttpDelete("{RouterId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteRouter(int RouterId)
+        {
+            if (!_routerRepos.RouterExists(RouterId))
+            {
+                return NotFound();
+            }
+
+            var routerToDelete = _routerRepos.GetRouter(RouterId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (!_routerRepos.DeleteRouter(routerToDelete))
+            {
+                ModelState.AddModelError("", "SMTH went wrong man");
+            }
+            return NoContent();
+        }
     }
 }
 

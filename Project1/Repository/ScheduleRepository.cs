@@ -42,6 +42,12 @@ namespace Project1.Repository
             return Save();
         }
 
+        public bool DeleteSchedule(Schedule schedule)
+        {
+            _context.Remove(schedule);
+            return Save();
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();

@@ -45,6 +45,11 @@ namespace Project1.Repository
             _context.Update(trainDriver);
             return Save();
         }
+        public bool DeleteTrainDriver(TrainDriver trainDriver)
+        {
+            _context.Remove(trainDriver);
+            return Save();
+        }
         public bool Save()
         {
             var saved = _context.SaveChanges();

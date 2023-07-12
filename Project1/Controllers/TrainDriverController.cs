@@ -120,5 +120,32 @@ namespace Project1.Controllers
 
             return NoContent();
         }
+
+
+
+        //Delete
+
+        [HttpDelete("{DriverId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteTrainDriver(int DriverId)
+        {
+            if (!_trainDriverRepos.TrainDriverExists(DriverId))
+            {
+                return NotFound();
+            }
+
+            var driverToDelete = _trainDriverRepos.GetDriver(DriverId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (!_trainDriverRepos.DeleteTrainDriver(driverToDelete))
+            {
+                ModelState.AddModelError("", "SMTH went wrong man");
+            }
+            return NoContent();
+        }
+
     }
 }

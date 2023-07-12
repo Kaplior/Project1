@@ -10,6 +10,7 @@ namespace Project1.Interface
         bool TrainExists(int Tid);
         bool CreateTrain(Train train);
         bool UpdateTrain(Train train);
+        bool DeleteTrain(Train train);
         bool Save();
     }
 }

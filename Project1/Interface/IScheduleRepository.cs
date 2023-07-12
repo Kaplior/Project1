@@ -9,6 +9,7 @@ namespace Project1.Interface
         bool ScheduleExists(int sid);
         bool CreateSchedule(Schedule schedule);
         bool UpdateSchedule(Schedule schedule);
+        bool DeleteSchedule(Schedule schedule);
         bool Save();
     }
 }

@@ -129,5 +129,32 @@ namespace Project1.Controllers
             
             return NoContent();
         }
+
+
+
+        //Delete
+
+        [HttpDelete("{TrainId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteTrain(int TrainId)
+        {
+            if (!_trainRepos.TrainExists(TrainId))
+            {
+                return NotFound();
+            }
+            
+            var trainToDelete = _trainRepos.GetTrain(TrainId);
+
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if(!_trainRepos.DeleteTrain(trainToDelete))
+            {
+                ModelState.AddModelError("", "SMTH went wrong man");
+            }    
+            return NoContent();
+        }
+
     }
 }

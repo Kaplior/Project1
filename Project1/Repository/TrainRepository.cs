@@ -44,6 +44,13 @@ namespace Project1.Repository
             _context.Update(train);
             return Save();
         }
+
+        public bool DeleteTrain(Train train) 
+        {
+            _context.Remove(train);
+            return Save();
+        }
+
         public bool Save()
         {
             return _context.SaveChanges() > 0;

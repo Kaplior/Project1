@@ -39,6 +39,12 @@ namespace Project1.Repository
             return Save();
         }
 
+        public bool DeleteRouter(Router router)
+        {
+            _context.Remove(router);
+            return Save();
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();

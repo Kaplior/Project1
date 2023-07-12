@@ -10,6 +10,7 @@ namespace Project1.Interface
         bool TrainDriverExists(int drivid);
         bool CreateTrainDriver(TrainDriver trainDriver);
         bool UpdateTrainDriver(TrainDriver trainDriver);
+        bool DeleteTrainDriver(TrainDriver trainDriver);
         bool Save();
 
     }
